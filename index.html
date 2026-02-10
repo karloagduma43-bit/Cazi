@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FAEEE6;
+            overflow: hidden;
+        }
+
+        #content {
+            background-color: #FFC0CB;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            padding: 20px;
+            text-align: center;
+            z-index: 2;
+            max-width: 500px;
+        }
+
+        #yesButton, #noButton {
+            font-size: 20px;
+            border-radius: 12px;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #yesButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* HEARTS */
+        .heart {
+            position: fixed;
+            top: -100px;
+            width: 100px;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6"><path fill="%23FF0000" d="M16 29.6c-1-.6-21-12.6-16-20C5.7 5.6 10.3 4 16 11c5.7-7 10.3-5.4 16-2.6 5 7.4-15 19.6-16 20z"/></svg>');
+            animation: fall 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* LILIES */
+        .lily {
+            position: fixed;
+            bottom: -120px;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="%23FFFFFF" d="M32 6c6 10 18 18 18 30 0 10-8 18-18 18S14 46 14 36c0-12 12-20 18-30z"/><circle cx="32" cy="36" r="4" fill="%23FFD700"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: rise 6s ease-in-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translateY(-120vh); opacity: 0; }
+        }
+
+        /* PHOTOS */
+        #photoContainer {
+            display: none;
+            margin-top: 15px;
+        }
+
+        #photoContainer img {
+            width: 120px;
+            border-radius: 12px;
+            margin: 5px;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔊 AUDIO FILES -->
+    <audio id="yesSound" src="yes.mp3"></audio>
+    <audio id="noSound" src="no.mp3"></audio>
+
+    <div id="content">
+        <h2 id="question"> Cassie Louisa Europa Manalo, Would my beautiful baby be my valentine?</h2>
+
+        <button id="yesButton">YES</button>
+        <button id="noButton">NO</button>
+
+        <p id="message"></p>
+
+        <div id="photoContainer">
+            <img src="1.jpg">
+            <img src="2.jpg">
+            <img src="3.jpg">
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+
+        document.getElementById('noButton').addEventListener('click', function() {
+            noClickCount++;
+
+            // 🔊 play NO sound
+            document.getElementById('noSound').play();
+
+            if (noClickCount < 15) {
+                this.style.position = 'absolute';
+                this.style.left = Math.random() * window.innerWidth + 'px';
+                this.style.top = Math.random() * window.innerHeight + 'px';
+                document.getElementById('message').innerText = 'Are you sure? 👀';
+            } else {
+                document.getElementById('message').innerText = 'Oh no! You broke the button :c';
+                this.disabled = true;
+            }
+        });
+
+        document.getElementById('yesButton').addEventListener('click', function() {
+
+            // 🔊 play YES sound
+            document.getElementById('yesSound').play();
+
+            document.getElementById('question').innerText = 'YEYYYYYYYYY 💖';
+            document.getElementById('message').innerText =
+                "Thank you for making me the happiest guy in the earth, baby. Know that I will forever love you. Pipiliin kita araw araw walang hanggan. You're mine na forever hehe.";
+
+            document.getElementById('photoContainer').style.display = 'block';
+
+            // hearts
+            for (let i = 0; i < 80; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                document.body.appendChild(heart);
+            }
+
+            // lilies
+            for (let j = 0; j < 20; j++) {
+                let lily = document.createElement('div');
+                lily.className = 'lily';
+                lily.style.left = Math.random() * window.innerWidth + 'px';
+                document.body.appendChild(lily);
+            }
+
+            document.getElementById('yesButton').style.display = 'none';
+            document.getElementById('noButton').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
