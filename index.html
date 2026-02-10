@@ -104,7 +104,9 @@
     <audio id="noSound" src="no.mp3"></audio>
 
     <div id="content">
-        <h2 id="question"> Cassie Louisa Europa Manalo, Would my beautiful baby be my valentine?</h2>
+        <h2 id="question">
+            Cassie Louisa Europa Manalo, would you like to be my valentine?
+        </h2>
 
         <button id="yesButton">YES</button>
         <button id="noButton">NO</button>
@@ -121,7 +123,7 @@
     <script>
         let noClickCount = 0;
 
-        document.getElementById('noButton').addEventListener('click', function() {
+        document.getElementById('noButton').addEventListener('click', function () {
             noClickCount++;
 
             // 🔊 play NO sound
@@ -138,14 +140,14 @@
             }
         });
 
-        document.getElementById('yesButton').addEventListener('click', function() {
+        document.getElementById('yesButton').addEventListener('click', function () {
 
             // 🔊 play YES sound
             document.getElementById('yesSound').play();
 
             document.getElementById('question').innerText = 'YEYYYYYYYYY 💖';
             document.getElementById('message').innerText =
-                "Thank you for making me the happiest guy in the earth, baby. Know that I will forever love you. Pipiliin kita araw araw walang hanggan. You're mine na forever hehe.";
+                "You make me so much happy more than I could ever express. Thank you for choosing me. I will always choose you until the end of time.";
 
             document.getElementById('photoContainer').style.display = 'block';
 
